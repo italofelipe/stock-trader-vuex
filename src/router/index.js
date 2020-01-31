@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../views/Home';
-import Stocks from '../components/stocks/Stocks';
+import Stocks from '../views/Stocks';
 import Portfolio from '../components/portfolio/Portfolio';
 Vue.use(VueRouter);
 
