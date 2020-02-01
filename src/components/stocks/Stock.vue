@@ -25,9 +25,7 @@
 <script>
 export default {
   name: "Stock",
-  props: {
-    stock: Object
-  },
+  props: ["stock"],
   data() {
     return {
       quantity: 0
@@ -41,7 +39,7 @@ export default {
         quantity: parseInt(this.quantity)
       };
       console.log(order);
-      this.$store.dispatch('buyStock', order)
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     }
   }
