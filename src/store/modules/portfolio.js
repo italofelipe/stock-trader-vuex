@@ -19,7 +19,7 @@ const mutations = {
 	},
 	SELL_STOCKS(state, { stockId, quantity, stockPrice }) {
 		// Verificar se ja temos esse stock no array antes de registrar (evitar duplicatas)
-		const record = state.stocks.find((element) => element.id === stockId.id);
+		const record = state.stocks.find((element) => element.id === stockId);
 		if (record.quantity > quantity) {
 			record.quantity -= quantity;
 		} else {
