@@ -19,7 +19,11 @@
         <a href="#" @click="this.endDay">End Day</a>
       </li>
 
-      <li class="dropdown">
+      <li
+        class="dropdown"
+        @click="isDropdownOpen  = !isDropdownOpen"
+        :class="{ open: isDropdownOpen }"
+      >
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -31,10 +35,10 @@
         >Save & Load</a>
         <ul class="dropdown-menu">
           <li>
-            <a>Save Data</a>
+            <a href="#" class="m-3">Save Data</a>
           </li>
           <li>
-            <a>Load Data</a>
+            <a href="#" class="m-3">Load Data</a>
           </li>
         </ul>
       </li>
@@ -46,6 +50,9 @@
 import { mapActions } from "vuex";
 export default {
   name: "Header",
+  data() {
+    return { isDropdownOpen: false };
+  },
   computed: {
     funds() {
       return this.$store.getters.funds;
@@ -61,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: #333;
+}
 li {
   list-style-type: none;
 }
