@@ -38,7 +38,7 @@
                         <a @click="saveData" class="m-3" href="#">Save Data</a>
                     </li>
                     <li>
-                        <a class="m-3" href="#">Load Data</a>
+                        <a @click="loadData" class="m-3" href="#">Load Data</a>
                     </li>
                 </ul>
             </li>
@@ -60,7 +60,10 @@
             }
         },
         methods: {
-            ...mapActions(["randomizeStocks"]),
+            ...mapActions({
+                randomizeStocks: 'randomizeStocks',
+                fetchData: "loadData"
+            }),
             endDay() {
                 this.randomizeStocks();
             },
@@ -72,6 +75,9 @@
                 }
                 // Usaremos PUT aqui propositalmente, para que sempre possamos sobrescrever o dia anterior
                 this.$http.put('data.json', data)
+            },
+            loadData() {
+                this.fetchData()
             }
         }
     };
