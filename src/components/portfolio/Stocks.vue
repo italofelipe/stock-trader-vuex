@@ -9,13 +9,20 @@
       </div>
       <div class="card-body">
         <div class="card-corpo">
-          <input class="form-control" placeholder="Quantity" type="text" v-model="quantity" />
+          <input
+            class="form-control"
+            :class="{ dangerForm: insuficientQuantity}"
+            placeholder="Quantity"
+            type="number"
+            v-model="quantity"
+          />
 
           <button
             class="btn btn-success"
             @click="sellStock"
-            :disabled="quantity <=  0 || !Number.isInteger(parseInt(this.quantity))"
-          >Sell</button>
+            :disabled="insuficientQuantity || quantity <=  0 || !Number.isInteger(parseInt(this.quantity))"
+            :class="{ danger: insuficientQuantity}"
+          >{{ insuficientQuantity ? 'Not enough' : 'Sell' }}</button>
         </div>
       </div>
     </div>
@@ -31,6 +38,11 @@ export default {
     return {
       quantity: 0
     };
+  },
+  computed: {
+    insuficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    }
   },
   methods: {
     ...mapActions({
@@ -50,4 +62,10 @@ export default {
 </script>
 
 <style scoped>
+.danger {
+  background: #df363e;
+}
+.dangerForm {
+  border: 1px solid #df363e;
+}
 </style>

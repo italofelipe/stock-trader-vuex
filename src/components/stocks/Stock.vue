@@ -9,13 +9,19 @@
       </div>
       <div class="card-body">
         <div class="card-corpo">
-          <input class="form-control" placeholder="Quantity" type="text" v-model="quantity" />
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Quantity"
+            v-model="quantity"
+            :class="{ danger: insuficientFunds}"
+          />
 
           <button
             class="btn btn-success"
             @click="buyStock"
-            :disabled="quantity <=  0 || !Number.isInteger(parseInt(this.quantity))"
-          >Buy</button>
+            :disabled="insuficientFunds || quantity <=  0 || !Number.isInteger(parseInt(this.quantity))"
+          >{{ insuficientFunds ? 'Not enough Money' : 'Buy' }}</button>
         </div>
       </div>
     </div>
@@ -30,6 +36,14 @@ export default {
     return {
       quantity: 0
     };
+  },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insuficientFunds() {
+      return this.quantity * this.stock.price > this.funds; // retorna true ou false
+    }
   },
   methods: {
     buyStock() {
@@ -47,6 +61,9 @@ export default {
 </script>
 
 <style scoped>
+.danger {
+  border-color: #df363e;
+}
 h5 {
   color: #fefefe;
 }
