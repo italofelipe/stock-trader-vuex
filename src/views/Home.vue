@@ -8,7 +8,7 @@
       Your funds:
       <span
         :class="[ funds > 1000 ? 'text-success text-bold' : 'text-danger text-bold']"
-      >{{ funds }}</span>
+      >{{ funds | currency }}</span>
     </h5>
   </div>
 </template>
